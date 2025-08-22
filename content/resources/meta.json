@@ -1,4 +1,11 @@
 {
-	"title": "All Resources",
-	"pages": ["---Resources---", "!index" , "...", "---Contribute---", "contribution-guide"]
+  "title": "All Resources",
+  "pages": [
+    "---Resources---",
+    "!index",
+    "!favorites",
+    "...",
+    "---Contribute---",
+    "contribution-guide"
+  ]
 }

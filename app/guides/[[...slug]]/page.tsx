@@ -74,16 +74,11 @@ export async function generateMetadata({
   const page = guidesSource.getPage(slug)
   if (!page) notFound()
 
-  const image = ["/guides-og", ...slug, "image.png"].join("/")
-  return {
+  return guidesMetadataImage.withImage(slug, {
     title: page.data.title,
     description: page.data.description,
     openGraph: {
-      images: image,
+      url: `/guides/${slug.join("/")}`,
     },
-    twitter: {
-      card: "summary_large_image",
-      images: image,
-    },
-  }
+  })
 }

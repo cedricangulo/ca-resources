@@ -1,5 +1,5 @@
 import { HomeLayoutProps } from "fumadocs-ui/layouts/home"
-import { Book, Box } from "lucide-react"
+import { Book, Box, Heart } from "lucide-react"
 
 import React from "react"
 
@@ -54,6 +54,12 @@ export const baseOptions: HomeLayoutProps = {
       icon: <Box />,
       text: "Resources",
       url: "/resources/chrome-extensions",
+      active: "none",
+    },
+    {
+      icon: <Heart />,
+      text: "Favorites",
+      url: "/resources/favorites",
       active: "none",
     },
     {

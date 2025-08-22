@@ -15,6 +15,7 @@ const reviews = [
       "Generate or browse beautiful color combinations for your designs.",
     icon: "/resources/colors/coolors.png",
     href: "https://coolors.co/",
+    category: "colors",
   },
   {
     title: "Font Awesome",

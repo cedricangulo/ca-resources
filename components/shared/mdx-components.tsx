@@ -6,7 +6,9 @@ import defaultMdxComponents from "fumadocs-ui/mdx"
 
 import { LoginForm } from "@/components/shared/login-form"
 import { Textarea } from "@/components/ui/textarea"
+import { cn } from "@/lib/utils"
 
+import FavoritesPage from "../favorites/favorites-page"
 import { Button } from "../ui/button"
 import { Checkbox } from "../ui/checkbox"
 import { Input } from "../ui/input"
@@ -25,14 +27,15 @@ import {
   TableExample,
   UnorderedList,
 } from "./mdx-elements"
-import CustomCard from "./resources/custom-card"
+import CustomCardWithContext from "./resources/custom-card-with-context"
 import { Wrapper } from "./wrapper"
 
 export const components = {
   BorderExample,
   Button,
   Checkbox,
-  CustomCard,
+  CustomCard: CustomCardWithContext,
+  FavoritesPage,
   DataTable,
   DataTableExample,
   EmailGenerator,
@@ -61,4 +64,17 @@ export const components = {
   UnorderedList,
   Wrapper,
   ...defaultMdxComponents,
+  // Override the default Cards container classes globally for MDX
+  Cards: (props: React.ComponentProps<"div">) => {
+    const DefaultCards = defaultMdxComponents.Cards
+    return (
+      <DefaultCards
+        {...props}
+        className={cn(
+          "grid grid-cols-1 sm:grid-cols-2 gap-3 @container",
+          props.className,
+        )}
+      />
+    )
+  },
 }
