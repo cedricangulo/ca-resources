@@ -26,7 +26,7 @@ export default function HomePage() {
         >
           <div className="mx-auto max-w-5xl pb-24">
             <GitHubStarsButton
-              username="bryan308"
+              username="cedricangulo"
               repo="ca-resources"
               className="mb-6 w-fit sm:mx-auto"
             />

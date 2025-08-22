@@ -25,7 +25,7 @@ export default async function Page(props: {
     process.env.NODE_ENV === "development"
       ? null
       : await getGithubLastEdit({
-          owner: "bryan308",
+          owner: "cedricangulo",
           repo: "ca-resources",
           token: `Bearer ${process.env.GITHUB_TOKEN}`,
           sha: "main",
@@ -42,7 +42,7 @@ export default async function Page(props: {
         single: false,
       }}
       editOnGithub={{
-        owner: "bryan308",
+        owner: "cedricangulo",
         repo: "ca-resources",
         sha: "main",
         path: path,

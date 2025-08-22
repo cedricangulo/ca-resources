@@ -8,7 +8,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const sitemapEntries = await Promise.all(
     resourcePages.map(async (page) => {
       const lastEdit = await getGithubLastEdit({
-        owner: "bryan308",
+        owner: "cedricangulo",
         repo: "ca-resources",
         token: `Bearer ${process.env.GITHUB_TOKEN}`,
         sha: "main",

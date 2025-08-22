@@ -13,7 +13,7 @@ import Image from "next/image"
  * Docs Layout: app/docs/layout.tsx
  */
 export const baseOptions: HomeLayoutProps = {
-  githubUrl: "https://github.com/bryan308/ca-resources",
+  githubUrl: "https://github.com/cedricangulo/ca-resources",
   nav: {
     transparentMode: "top",
     title: (
