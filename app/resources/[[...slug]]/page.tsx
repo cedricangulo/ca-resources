@@ -9,6 +9,7 @@ import {
 import { notFound } from "next/navigation"
 
 import { components } from "@/components/shared/mdx-components"
+import { PageProvider } from "@/components/shared/page-context"
 import { resourcesMetadataImage } from "@/lib/metadata"
 import { resourcesSource } from "@/lib/source"
 
@@ -33,31 +34,40 @@ export default async function Page(props: {
         })
 
   const MDXContent = page.data.body
+  const category = page.data.title.toLowerCase().replace(/\s+/g, "-")
 
-  return (
-    <DocsPage
-      lastUpdate={time || undefined}
-      tableOfContent={{
-        style: "clerk",
-        single: false,
-      }}
-      editOnGithub={{
+  // * Check if this is the favorites page to exclude editOnGithub button
+  const isFavoritesPage = params.slug && params.slug.includes("favorites")
+  const editOnGithubProps = isFavoritesPage
+    ? undefined
+    : {
         owner: "cedricangulo",
         repo: "ca-resources",
         sha: "main",
         path: path,
-      }}
-      toc={page.data.toc}
-    >
-      <DocsTitle>{page.data.title}</DocsTitle>
-      <DocsDescription>{page.data.description}</DocsDescription>
-      <DocsBody>
-        <MDXContent
-          code={page.data.body}
-          components={components}
-        />
-      </DocsBody>
-    </DocsPage>
+      }
+
+  return (
+    <PageProvider category={category}>
+      <DocsPage
+        lastUpdate={time || undefined}
+        tableOfContent={{
+          style: "clerk",
+          single: false,
+        }}
+        editOnGithub={editOnGithubProps}
+        toc={page.data.toc}
+      >
+        <DocsTitle>{page.data.title}</DocsTitle>
+        <DocsDescription>{page.data.description}</DocsDescription>
+        <DocsBody>
+          <MDXContent
+            code={page.data.body}
+            components={components}
+          />
+        </DocsBody>
+      </DocsPage>
+    </PageProvider>
   )
 }
 
@@ -74,16 +84,11 @@ export async function generateMetadata({
   const page = resourcesSource.getPage(slug)
   if (!page) notFound()
 
-  const image = ["/resources-og", ...slug, "image.png"].join("/")
-  return {
+  return resourcesMetadataImage.withImage(slug, {
     title: page.data.title,
     description: page.data.description,
     openGraph: {
-      images: image,
+      url: `/resources/${slug.join("/")}`,
     },
-    twitter: {
-      card: "summary_large_image",
-      images: image,
-    },
-  }
+  })
 }
