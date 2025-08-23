@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "motion/react"
+import { Route } from "next"
 
 import Link from "next/link"
 
@@ -26,7 +27,7 @@ export default function ActionButton() {
         asChild
       >
         <Link
-          href="/guides"
+          href={`/guides` as Route}
           aria-label="Learn guides"
         >
           Build

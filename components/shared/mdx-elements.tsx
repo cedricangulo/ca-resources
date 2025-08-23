@@ -1,3 +1,5 @@
+import { Route } from "next"
+
 import React from "react"
 
 import Link from "next/link"
@@ -123,7 +125,7 @@ const MDXLink = ({
   return (
     <Link
       className="link"
-      href={href}
+      href={href as Route}
       target={target}
     >
       {children}

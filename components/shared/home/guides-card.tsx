@@ -9,6 +9,7 @@ import {
   Table,
 } from "lucide-react"
 import { motion } from "motion/react"
+import { Route } from "next"
 
 import React from "react"
 
@@ -61,7 +62,7 @@ export default function FeaturedGuides() {
       {guidesHighlights.map((g, index) => (
         <motion.a
           key={g.title}
-          href={g.href}
+          href={g.href as Route}
           className="relative border-r border-b border-dashed px-6 py-12"
           aria-label={`Guide: ${g.title}`}
         >

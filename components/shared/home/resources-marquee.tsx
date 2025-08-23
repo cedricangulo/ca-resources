@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "motion/react"
+import { Route } from "next"
 
 import Image from "next/image"
 import Link from "next/link"
@@ -85,7 +86,7 @@ const ResourcesMarquee = () => {
           <Link
             key={review.title}
             className="not-prose h-full max-w-52 md:max-w-sm bg-card text-card-foreground hover:bg-accent/80 block rounded-lg border p-4 text-sm shadow-xs transition-colors hover:shadow"
-            href={`${review.href}?ref=ca-resources.vercel.app`}
+            href={`${review.href}?ref=ca-resources.vercel.app` as Route}
             title={review.title}
             target="_blank"
             rel="noopener noreferrer"
@@ -123,7 +124,7 @@ const ResourcesMarquee = () => {
           <Link
             key={review.title}
             className="not-prose h-full max-w-52 md:max-w-sm bg-card text-card-foreground hover:bg-accent/80 block rounded-lg border p-4 text-sm shadow-xs transition-colors hover:shadow"
-            href={`${review.href}?ref=ca-resources.vercel.app`}
+            href={`${review.href}?ref=ca-resources.vercel.app` as Route}
             title={review.title}
             target="_blank"
             rel="noopener noreferrer"

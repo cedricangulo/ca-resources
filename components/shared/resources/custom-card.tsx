@@ -1,4 +1,5 @@
 import { Box } from "lucide-react"
+import { Route } from "next"
 
 import { ReactNode } from "react"
 
@@ -32,7 +33,7 @@ export default function CustomCard({
           "not-prose h-full bg-card text-card-foreground hover:bg-accent/80 block rounded-lg border p-4 text-sm shadow-xs transition-colors hover:shadow",
           className,
         )}
-        href={`${href}?ref=ca-resources.vercel.app`}
+        href={`${href}?ref=ca-resources.vercel.app` as Route}
         title={title}
         target="_blank"
         rel="noopener noreferrer"

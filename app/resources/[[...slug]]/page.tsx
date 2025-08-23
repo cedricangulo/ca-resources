@@ -47,10 +47,12 @@ export default async function Page(props: {
         path: path,
       }
 
+  const showLastUpdate = isFavoritesPage ? undefined : time || undefined
+
   return (
     <PageProvider category={category}>
       <DocsPage
-        lastUpdate={time || undefined}
+        lastUpdate={showLastUpdate}
         tableOfContent={{
           style: "clerk",
           single: false,
