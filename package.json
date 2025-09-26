@@ -6,7 +6,7 @@
     "build": "next build --turbopack",
     "dev": "next dev --turbopack",
     "start": "next start",
-    "lint": "eslint . && echo \"\u001b[32m✓ ESLint completed successfully - no errors found\u001b[0m\"",
+    "lint": "eslint .",
     "format": "prettier --write '**/*.ts{,x}'",
     "clean": "rimraf .next .source",
     "postinstall": "fumadocs-mdx"
@@ -25,7 +25,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "fumadocs-core": "^15.6.4",
-    "fumadocs-mdx": "^11.6.11",
+    "fumadocs-mdx": "^12.0.1",
     "fumadocs-ui": "^15.6.4",
     "ldrs": "^1.1.7",
     "lucide-react": "^0.525.0",
