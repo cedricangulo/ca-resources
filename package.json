@@ -30,7 +30,7 @@
     "ldrs": "^1.1.7",
     "lucide-react": "^0.544.0",
     "motion": "^12.23.22",
-    "next": "^15.5.4",
+    "next": "15.5.7",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-use-measure": "^2.1.7",
