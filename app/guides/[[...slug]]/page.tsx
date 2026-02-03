@@ -1,4 +1,4 @@
-import { getGithubLastEdit } from "fumadocs-core/server"
+import { getGithubLastEdit } from "fumadocs-core/content/github"
 import {
   DocsBody,
   DocsDescription,
@@ -9,8 +9,9 @@ import {
 import { notFound } from "next/navigation"
 
 import { components } from "@/components/shared/mdx-components"
-import { guidesMetadataImage } from "@/lib/metadata"
+import { generateGuidesMetadata } from "@/lib/metadata"
 import { guidesSource } from "@/lib/source"
+import type { MDXPageData } from "@/types/fumadocs"
 
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>
@@ -19,7 +20,7 @@ export default async function Page(props: {
   const page = guidesSource.getPage(params.slug)
   if (!page) notFound()
 
-  const path = `content/guides/${page.file.flattenedPath}.mdx`
+  const path = `content/guides/${page.path}.mdx`
 
   const time =
     process.env.NODE_ENV === "development"
@@ -32,7 +33,10 @@ export default async function Page(props: {
           path: path,
         })
 
-  const MDXContent = page.data.body
+  // Cast to MDXPageData to access body and toc
+  const pageData = page.data as MDXPageData
+  const MDXContent = pageData.body
+  const toc = pageData.toc
 
   return (
     <DocsPage
@@ -47,15 +51,12 @@ export default async function Page(props: {
         sha: "main",
         path: path,
       }}
-      toc={page.data.toc}
+      toc={toc}
     >
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>
-        <MDXContent
-          code={page.data.body}
-          components={components}
-        />
+        <MDXContent components={components} />
       </DocsBody>
     </DocsPage>
   )
@@ -74,11 +75,8 @@ export async function generateMetadata({
   const page = guidesSource.getPage(slug)
   if (!page) notFound()
 
-  return guidesMetadataImage.withImage(slug, {
-    title: page.data.title,
+  return generateGuidesMetadata(slug, {
+    title: page.data.title || "",
     description: page.data.description,
-    openGraph: {
-      url: `/guides/${slug.join("/")}`,
-    },
   })
 }

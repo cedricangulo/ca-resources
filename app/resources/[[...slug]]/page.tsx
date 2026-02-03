@@ -1,4 +1,4 @@
-import { getGithubLastEdit } from "fumadocs-core/server"
+import { getGithubLastEdit } from "fumadocs-core/content/github"
 import {
   DocsBody,
   DocsDescription,
@@ -10,8 +10,9 @@ import { notFound } from "next/navigation"
 
 import { components } from "@/components/shared/mdx-components"
 import { PageProvider } from "@/components/shared/page-context"
-import { resourcesMetadataImage } from "@/lib/metadata"
+import { generateResourcesMetadata } from "@/lib/metadata"
 import { resourcesSource } from "@/lib/source"
+import type { MDXPageData } from "@/types/fumadocs"
 
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>
@@ -20,7 +21,7 @@ export default async function Page(props: {
   const page = resourcesSource.getPage(params.slug)
   if (!page) notFound()
 
-  const path = `content/resources/${page.file.flattenedPath}.mdx`
+  const path = `content/resources/${page.path}.mdx`
 
   const time =
     process.env.NODE_ENV === "development"
@@ -33,8 +34,11 @@ export default async function Page(props: {
           path: path,
         })
 
-  const MDXContent = page.data.body
-  const category = page.data.title.toLowerCase().replace(/\s+/g, "-")
+  // Cast to MDXPageData to access body and toc
+  const pageData = page.data as MDXPageData
+  const MDXContent = pageData.body
+  const toc = pageData.toc
+  const category = (page.data.title || "").toLowerCase().replace(/\s+/g, "-")
 
   // * Check if this is the favorites page to exclude editOnGithub button
   const isFavoritesPage = params.slug && params.slug.includes("favorites")
@@ -58,15 +62,12 @@ export default async function Page(props: {
           single: false,
         }}
         editOnGithub={editOnGithubProps}
-        toc={page.data.toc}
+        toc={toc}
       >
         <DocsTitle>{page.data.title}</DocsTitle>
         <DocsDescription>{page.data.description}</DocsDescription>
         <DocsBody>
-          <MDXContent
-            code={page.data.body}
-            components={components}
-          />
+          <MDXContent components={components} />
         </DocsBody>
       </DocsPage>
     </PageProvider>
@@ -86,11 +87,8 @@ export async function generateMetadata({
   const page = resourcesSource.getPage(slug)
   if (!page) notFound()
 
-  return resourcesMetadataImage.withImage(slug, {
-    title: page.data.title,
+  return generateResourcesMetadata(slug, {
+    title: page.data.title || "",
     description: page.data.description,
-    openGraph: {
-      url: `/resources/${slug.join("/")}`,
-    },
   })
 }

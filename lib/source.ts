@@ -1,14 +1,14 @@
 import { loader } from "fumadocs-core/source"
-import { createMDXSource } from "fumadocs-mdx"
+import { toFumadocsSource } from "fumadocs-mdx/runtime/server"
 
 import { guides, guidesMeta, resources, resourcesMeta } from "@/.source"
 
 export const guidesSource = loader({
   baseUrl: "/guides",
-  source: createMDXSource(guides, guidesMeta),
+  source: toFumadocsSource(guides, guidesMeta),
 })
 
 export const resourcesSource = loader({
   baseUrl: "/resources",
-  source: createMDXSource(resources, resourcesMeta),
+  source: toFumadocsSource(resources, resourcesMeta),
 })

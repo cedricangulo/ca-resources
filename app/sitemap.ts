@@ -1,4 +1,4 @@
-import { getGithubLastEdit } from "fumadocs-core/server"
+import { getGithubLastEdit } from "fumadocs-core/content/github"
 import type { MetadataRoute } from "next"
 
 import { resourcesSource } from "@/lib/source"
@@ -12,7 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         repo: "ca-resources",
         token: `Bearer ${process.env.GITHUB_TOKEN}`,
         sha: "main",
-        path: `/content/resources/${page.file.flattenedPath}.mdx`,
+        path: `/content/resources/${page.path}.mdx`,
       })
       return {
         url: `https://ca-resources.vercel.app/resources/${page.slugs}`,

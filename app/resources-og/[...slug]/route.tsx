@@ -13,8 +13,8 @@ export async function GET(
   if (!page) notFound()
 
   return generateOGImage({
-    title: page.data.title,
-    description: page.data.description,
+    title: page.data.title || "",
+    description: page.data.description || "",
   })
 }
 
