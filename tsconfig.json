@@ -24,7 +24,8 @@
       ],
       "content-collections": [
         "./.content-collections/generated"
-      ]
+      ],
+      "fumadocs-mdx:collections/*": [".source/*"]
     },
     "plugins": [
       {

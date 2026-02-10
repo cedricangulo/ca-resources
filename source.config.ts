@@ -1,11 +1,9 @@
-import {
-  defineDocs,
-} from "fumadocs-mdx/config"
+import { defineDocs } from "fumadocs-mdx/config";
 
-export const { docs: guides, meta: guidesMeta } = defineDocs({
+export const guides = defineDocs({
   dir: "content/guides",
-})
+});
 
-export const { docs: resources, meta: resourcesMeta } = defineDocs({
-  dir: "content/resources",
-})
+export const resources = defineDocs({
+  dir: "content/resources", 
+});

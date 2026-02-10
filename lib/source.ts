@@ -1,14 +1,12 @@
-import { loader } from "fumadocs-core/source"
-import { toFumadocsSource } from "fumadocs-mdx/runtime/server"
-
-import { guides, guidesMeta, resources, resourcesMeta } from "@/.source"
+import { guides, resources } from 'fumadocs-mdx:collections/server';
+import { loader } from 'fumadocs-core/source';
 
 export const guidesSource = loader({
-  baseUrl: "/guides",
-  source: toFumadocsSource(guides, guidesMeta),
-})
+  baseUrl: '/guides',
+  source: guides.toFumadocsSource(),
+});
 
 export const resourcesSource = loader({
-  baseUrl: "/resources",
-  source: toFumadocsSource(resources, resourcesMeta),
-})
+  baseUrl: '/resources',
+  source: resources.toFumadocsSource(),
+});
