@@ -14,6 +14,11 @@ const config = {
         port: "",
         pathname: "/f/**",
       },
+      {
+        protocol: "https",
+        hostname: "www.google.com",
+        pathname: "/s2/favicons/**",
+      }
     ],
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
